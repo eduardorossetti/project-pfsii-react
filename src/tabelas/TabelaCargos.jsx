@@ -25,7 +25,7 @@ export default function TabelaCadastroCargos({
 
   const handleDelete = async (codigo) => {
     await axios
-      .delete(`${urlInfra}/cargos/${codigo}`)
+      .delete(`${urlBase}/cargos/${codigo}`)
       .then(({ data }) => {
         const newArray = cargos.filter((cargo) => cargo.codigo !== codigo);
 
