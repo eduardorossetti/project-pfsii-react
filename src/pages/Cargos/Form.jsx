@@ -38,7 +38,7 @@ export default function FormCargo({
     if (form.checkValidity()) {
       if (onEdit) {
         await axios
-          .put(urlBase + "/cargos/", {
+          .put(urlBase + "/cargos", {
             codigo: cargo.codigo.value,
             nome: cargo.nome.value,
             descricao: cargo.descricao.value,
@@ -47,7 +47,7 @@ export default function FormCargo({
           .catch(({ data }) => toast.error(data.mensagem));
       } else {
         await axios
-          .post(urlBase + "/cargos/", {
+          .post(urlBase + "/cargos", {
             codigo: cargo.codigo.value,
             nome: cargo.nome.value,
             descricao: cargo.descricao.value,
