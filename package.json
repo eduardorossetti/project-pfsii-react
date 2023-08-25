@@ -1,7 +1,7 @@
 {
   "name": "project-pfsii",
   "version": "0.1.0",
-  "homepage": "https://eduardorossetti.github.io/",
+  "homepage": "https://eduardorossetti.github.io/project-pfsii-react/",
   "private": true,
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^6.4.2",

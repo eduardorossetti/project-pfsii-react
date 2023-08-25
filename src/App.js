@@ -12,6 +12,7 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route exact path="/" element={<PaginaInicial />} />
+          <Route exact path="/project-pfsii-react/" element={<PaginaInicial />} />
           <Route
             exact
             path="cadastro-funcionario"
