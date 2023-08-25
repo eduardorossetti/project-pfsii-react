@@ -33,7 +33,7 @@ const AppRoutes = () => {
     <Router>
       <AuthProvider>
         <Routes>
-          <Route exact path="/login" element={<LoginPage />} />
+          <Route exact path="/project-pfsii-react" element={<LoginPage />} />
           <Route
             exact
             path="/"
