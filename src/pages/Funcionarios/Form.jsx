@@ -86,7 +86,7 @@ export default function FormFuncionario({
     if (form.checkValidity()) {
       if (onEdit) {
         await axios
-          .put(`${urlBase}/funcionarios`, {
+          .put(`${urlBase}/funcionarios/`, {
             codigo: funcionario.codigo.value,
             cpf: funcionario.cpf.value,
             dt_nasc: funcionario.dt_nasc.value,
@@ -112,7 +112,7 @@ export default function FormFuncionario({
           .catch(({ response }) => toast.error(response.data.mensagem));
       } else {
         await axios
-          .post(`${urlBase}/funcionarios`, {
+          .post(`${urlBase}/funcionarios/`, {
             cpf: funcionario.cpf.value,
             dt_nasc: funcionario.dt_nasc.value,
             dt_admissao: funcionario.dt_admissao.value,
