@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import FormFuncionario from "../formularios/FormFuncionario.jsx";
 import TabelaCadastroFuncionarios from "../tabelas/TabelaFuncionarios.jsx";
-import { urlBase, urlInfra } from "../utils/definicoes.js";
+import { urlInfra } from "../utils/definicoes.js";
 import axios from "axios";
 import { toast } from "react-toastify";
 

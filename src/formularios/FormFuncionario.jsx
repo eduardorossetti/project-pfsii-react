@@ -2,7 +2,7 @@ import { Container, Col, Form, Row } from "react-bootstrap";
 import { useEffect, useRef, useState } from "react";
 import MenuFormulario from "../templates/MenuFormulario";
 import Cabecalho2 from "../templates/Cabecalho2";
-import { urlBase } from "../utils/definicoes";
+import { urlInfra } from "../utils/definicoes";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { cep, cpf, telefone } from "../utils/masks";
@@ -86,7 +86,7 @@ export default function FormFuncionario({
     if (form.checkValidity()) {
       if (onEdit) {
         await axios
-          .put(`${urlBase}/funcionarios/`, {
+          .put(`${urlInfra}/funcionarios/`, {
             codigo: funcionario.codigo.value,
             cpf: funcionario.cpf.value,
             dt_nasc: funcionario.dt_nasc.value,
@@ -112,7 +112,7 @@ export default function FormFuncionario({
           .catch(({ response }) => toast.error(response.data.mensagem));
       } else {
         await axios
-          .post(`${urlBase}/funcionarios/`, {
+          .post(`${urlInfra}/funcionarios/`, {
             cpf: funcionario.cpf.value,
             dt_nasc: funcionario.dt_nasc.value,
             dt_admissao: funcionario.dt_admissao.value,

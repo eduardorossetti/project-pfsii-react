@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import FormCargo from "../formularios/FormCargo";
 import TabelaCadastroCargos from "../tabelas/TabelaCargos";
-import { urlBase, urlInfra } from "../utils/definicoes";
+import { urlInfra } from "../utils/definicoes";
 import axios from "axios";
 import { toast } from "react-toastify";
 
