@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import FormCargo from "../formularios/FormCargo";
 import TabelaCadastroCargos from "../tabelas/TabelaCargos";
-import { urlInfra } from "../utils/definicoes";
+import { urlBase } from "../utils/definicoes";
 import axios from "axios";
 import { toast } from "react-toastify";
 
@@ -13,7 +13,7 @@ export default function TelaCadastroCargos(props) {
 
   const getCargos = async () => {
     try {
-      const res = await axios.get(urlInfra + "/cargos");
+      const res = await axios.get(urlBase + "/cargos");
       setCargos(res.data);
     } catch (error) {
       toast.error(error);

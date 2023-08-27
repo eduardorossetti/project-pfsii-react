@@ -2,10 +2,11 @@ import { Container, Col, Form, Row } from "react-bootstrap";
 import { useEffect, useRef, useState } from "react";
 import MenuFormulario from "../templates/MenuFormulario";
 import Cabecalho2 from "../templates/Cabecalho2";
-import { urlInfra } from "../utils/definicoes";
+import { urlBase } from "../utils/definicoes";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { cep, cpf, telefone } from "../utils/masks";
+import SearchBar from "../SearchBar/Index";
 
 export default function FormFuncionario({
   cargos,
@@ -15,7 +16,20 @@ export default function FormFuncionario({
   getFuncionarios,
 }) {
   const [validated, setValidated] = useState(false);
+  const [selectedCargo, setSelectedCargo] = useState({}); // eslint-disable-line
   const ref = useRef();
+
+  // const filterCargo = (codigo) => {
+  //   // console.log(codigo)
+  //   return cargos.filter((item) => item.codigo === codigo);
+  // };
+
+  // useEffect(() => {
+  //   if (onEdit) {
+  //     setSelectedCargo(filterCargo(onEdit.Cargo_codigo));
+  //     console.log(selectedCargo.codigo)
+  //   }
+  // }, [onEdit, cargos, setSelectedCargo]);
 
   useEffect(() => {
     if (onEdit) {
@@ -28,7 +42,7 @@ export default function FormFuncionario({
       funcionario.status.value = onEdit.status;
       funcionario.nome_usuario.value = onEdit.nome_usuario;
       funcionario.senha_usuario.value = onEdit.senha_usuario;
-      funcionario.cargo.value = onEdit.Cargo_codigo;
+      funcionario.cargo.value = onEdit.cargo_nome;
       funcionario.nome.value = onEdit.nome;
       funcionario.telefone.value = onEdit.telefone;
       funcionario.email.value = onEdit.email;
@@ -86,7 +100,7 @@ export default function FormFuncionario({
     if (form.checkValidity()) {
       if (onEdit) {
         await axios
-          .put(`${urlInfra}/funcionarios/`, {
+          .put(`${urlBase}/funcionarios/`, {
             codigo: funcionario.codigo.value,
             cpf: funcionario.cpf.value,
             dt_nasc: funcionario.dt_nasc.value,
@@ -112,7 +126,7 @@ export default function FormFuncionario({
           .catch(({ response }) => toast.error(response.data.mensagem));
       } else {
         await axios
-          .post(`${urlInfra}/funcionarios/`, {
+          .post(`${urlBase}/funcionarios/`, {
             cpf: funcionario.cpf.value,
             dt_nasc: funcionario.dt_nasc.value,
             dt_admissao: funcionario.dt_admissao.value,
@@ -251,7 +265,7 @@ export default function FormFuncionario({
             <Col>
               <Form.Group>
                 <Form.Label>Cargo</Form.Label>
-                <Form.Select name="cargo" required>
+                {/* <Form.Select name="cargo" required>
                   <option value="">Selecione</option>
                   {cargos.map((cargo, i) => {
                     return (
@@ -260,7 +274,16 @@ export default function FormFuncionario({
                       </option>
                     );
                   })}
-                </Form.Select>
+                </Form.Select> */}
+                <SearchBar
+                  placeholder="Informe o cargo"
+                  data={cargos}
+                  keyField="codigo"
+                  searchField="nome"
+                  select={setSelectedCargo}
+                  // value=""
+                  name="cargo"
+                />
                 <Form.Control.Feedback type="invalid">
                   Cargo do funcionário é obrigatório!
                 </Form.Control.Feedback>

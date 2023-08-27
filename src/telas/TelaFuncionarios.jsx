@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import FormFuncionario from "../formularios/FormFuncionario.jsx";
 import TabelaCadastroFuncionarios from "../tabelas/TabelaFuncionarios.jsx";
-import { urlInfra } from "../utils/definicoes.js";
+import { urlBase } from "../utils/definicoes.js";
 import axios from "axios";
 import { toast } from "react-toastify";
 
@@ -14,7 +14,7 @@ export default function TelaCadastroFuncionarios(props) {
 
   const getFuncionarios = async () => {
     try {
-      const res = await axios.get(urlInfra + "/funcionarios");
+      const res = await axios.get(urlBase + "/funcionarios");
       setFuncionarios(res.data);
     } catch (error) {
       toast.error(error);
@@ -23,7 +23,7 @@ export default function TelaCadastroFuncionarios(props) {
 
   const getCargos = async () => {
     try {
-      const res = await axios.get(urlInfra + "/cargos");
+      const res = await axios.get(urlBase + "/cargos");
       setCargos(res.data);
     } catch (error) {
       toast.error(error.message);

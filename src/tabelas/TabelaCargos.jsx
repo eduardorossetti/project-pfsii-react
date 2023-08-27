@@ -3,7 +3,7 @@ import { AiOutlineDelete, AiOutlineEdit } from "react-icons/ai";
 import { BotaoNovo } from "../templates/Botoes";
 import Cabecalho2 from "../templates/Cabecalho2";
 import { Container } from "react-bootstrap";
-import { urlInfra } from "../utils/definicoes";
+import { urlBase } from "../utils/definicoes";
 import axios from "axios";
 import { toast } from "react-toastify";
 
@@ -25,7 +25,7 @@ export default function TabelaCadastroCargos({
 
   const handleDelete = async (codigo) => {
     await axios
-      .delete(`${urlInfra}/cargos/${codigo}`)
+      .delete(`${urlBase}/cargos/${codigo}`)
       .then(({ data }) => {
         const newArray = cargos.filter((cargo) => cargo.codigo !== codigo);
 

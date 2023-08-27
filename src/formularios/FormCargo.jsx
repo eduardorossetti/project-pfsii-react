@@ -2,7 +2,7 @@ import { Container, Col, Form, Row } from "react-bootstrap";
 import { useEffect, useRef, useState } from "react";
 import MenuFormulario from "../templates/MenuFormulario";
 import Cabecalho2 from "../templates/Cabecalho2";
-import { urlInfra } from "../utils/definicoes";
+import { urlBase } from "../utils/definicoes";
 import axios from "axios";
 import { toast } from "react-toastify";
 
@@ -38,7 +38,7 @@ export default function FormCargo({
     if (form.checkValidity()) {
       if (onEdit) {
         await axios
-          .put(urlInfra + "/cargos/", {
+          .put(urlBase + "/cargos/", {
             codigo: cargo.codigo.value,
             nome: cargo.nome.value,
             descricao: cargo.descricao.value,
@@ -47,7 +47,7 @@ export default function FormCargo({
           .catch(({ data }) => toast.error(data.mensagem));
       } else {
         await axios
-          .post(urlInfra + "/cargos/", {
+          .post(urlBase + "/cargos/", {
             codigo: cargo.codigo.value,
             nome: cargo.nome.value,
             descricao: cargo.descricao.value,

@@ -3,7 +3,7 @@ import { AiOutlineDelete, AiOutlineEdit } from "react-icons/ai";
 import { BotaoNovo } from "../templates/Botoes";
 import Cabecalho2 from "../templates/Cabecalho2";
 import { Container } from "react-bootstrap";
-import { urlInfra } from "../utils/definicoes";
+import { urlBase} from "../utils/definicoes";
 import axios from "axios";
 import { toast } from "react-toastify";
 
@@ -25,7 +25,7 @@ export default function TabelaCadastroFuncionarios({
 
   const handleDelete = async (codigo) => {
     await axios
-      .delete(`${urlInfra}/funcionarios/${codigo}`)
+      .delete(`${urlBase}/funcionarios/${codigo}`)
       .then(({ data }) => {
         const newArray = funcionarios.filter(
           (funcionario) => funcionario.codigo !== codigo
