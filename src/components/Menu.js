@@ -33,39 +33,15 @@ export default function Menu() {
                 <NavDropdown title="Cadastro" id={`offcanvasNavbarDropdown`}>
                   <NavDropdown.Item
                     as={Link}
-                    to="/project-pfsii-react/cadastro/alunos"
-                  >
-                    Alunos
-                  </NavDropdown.Item>
-                  <NavDropdown.Item
-                    as={Link}
                     to="/project-pfsii-react/cadastro/cargos"
                   >
                     Cargos
                   </NavDropdown.Item>
                   <NavDropdown.Item
                     as={Link}
-                    to="/project-pfsii-react/cadastro/cursos"
-                  >
-                    Cursos
-                  </NavDropdown.Item>
-                  <NavDropdown.Item
-                    as={Link}
-                    to="/project-pfsii-react/cadastro/empresas"
-                  >
-                    Empresas
-                  </NavDropdown.Item>
-                  <NavDropdown.Item
-                    as={Link}
                     to="/project-pfsii-react/cadastro/funcionarios"
                   >
                     Funcionarios
-                  </NavDropdown.Item>
-                  <NavDropdown.Item
-                    as={Link}
-                    to="/project-pfsii-react/cadastro/turmas"
-                  >
-                    Turmas
                   </NavDropdown.Item>
                 </NavDropdown>
               </Nav>
