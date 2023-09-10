@@ -1,31 +1,23 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import {
-  Pagina404,
-  PaginaInicial,
-  PaginaCadastroFuncionario,
-  PaginaCadastroCargo,
-} from "./telas/Paginas";
+import AppRoutes from "./routes/AppRoutes";
+import { ToastContainer, Slide } from 'react-toastify';
 
 function App() {
   return (
-    <div>
-      <BrowserRouter>
-        <Routes>
-          <Route exact path="/" element={<PaginaInicial />} />
-          <Route exact path="/project-pfsii-react/" element={<PaginaInicial />} />
-          <Route
-            exact
-            path="cadastro-funcionario"
-            element={<PaginaCadastroFuncionario />}
-          />
-          <Route
-            exact
-            path="cadastro-cargo"
-            element={<PaginaCadastroCargo />}
-          />
-          <Route path="*" element={<Pagina404 />} />
-        </Routes>
-      </BrowserRouter>
+    <div className="App">
+      <AppRoutes />
+      <ToastContainer
+        position="bottom-left"
+        transition={Slide}
+        autoClose={2500}
+        hideProgressBar
+        newestOnTop={false}
+        closeOnClick={false}
+        rtl={false}
+        pauseOnFocusLoss
+        draggable={false}
+        pauseOnHover={true}
+        theme="light"
+      />
     </div>
   );
 }
