@@ -102,7 +102,7 @@ function LinhaFuncionario({ funcionario, handleEdit, handleConfirm }) {
       <td>{funcionario.nome}</td>
       <td>{funcionario.cpf}</td>
       {/* <td>{funcionario.nomeUsuario}</td> */}
-      <td>{funcionario.cargo.nome}</td>
+      <td>{funcionario.cargoPrincipal.nome}</td>
       {/* <td>{funcionario.telefone}</td> */}
       <td>{funcionario.status}</td>
       {/* <td>{funcionario.email}</td> */}

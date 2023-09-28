@@ -78,8 +78,8 @@ export default function FormFuncionario({
       }
 
       setSelectedCargo({
-        codigo: onEdit.cargo.codigo,
-        nome: onEdit.cargo.nome,
+        codigo: onEdit.cargoPrincipal.codigo,
+        nome: onEdit.cargoPrincipal.nome,
       });
     }
   }, [onEdit]);
