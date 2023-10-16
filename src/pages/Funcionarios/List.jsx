@@ -1,9 +1,9 @@
 import { Table, Form } from "react-bootstrap";
 import { AiOutlineDelete, AiOutlineEdit } from "react-icons/ai";
-import { BotaoNovo } from "../../components/Botoes";
-import Cabecalho2 from "../../components/Cabecalho2";
+import { BotaoNovo } from "../../components/Bottons";
+import HeaderBelow from "../../components/HeaderBelow";
 import { Container } from "react-bootstrap";
-import { urlBase } from "../../utils/definicoes";
+import { urlBase } from "../../utils/definitions";
 import axios from "axios";
 import { toast } from "react-toastify";
 
@@ -28,7 +28,7 @@ export default function TabelaCadastroFuncionarios({
       .delete(`${urlBase}/funcionarios/${codigo}`)
       .then((response) => {
         const newArray = funcionarios.filter(
-          (funcionario) => funcionario.codigo !== codigo
+          (funcionario) => funcionario.info.codigo !== codigo
         );
 
         setFuncionarios(newArray);
@@ -60,7 +60,7 @@ export default function TabelaCadastroFuncionarios({
 
   return (
     <div>
-      <Cabecalho2 texto1={"Consulta"} texto2={"Funcionarios"} />
+      <HeaderBelow texto1={"Consulta"} texto2={"Funcionários"} />
       <Container className="mt-3 overflow-auto">
         <div className="d-flex mb-3 justify-content-between">
           <BotaoNovo acaoBtnNovo={() => setExibeTabela(false)} />
@@ -81,7 +81,7 @@ export default function TabelaCadastroFuncionarios({
               <th>Nome</th>
               <th>CPF</th>
               {/* <th>Usuário</th> */}
-              <th>Cargo</th>
+              {/* <th>Cargo</th> */}
               {/* <th>Telefone</th> */}
               <th>Status</th>
               {/* <th>E-mail</th> */}
@@ -102,9 +102,9 @@ function LinhaFuncionario({ funcionario, handleEdit, handleConfirm }) {
       <td>{funcionario.nome}</td>
       <td>{funcionario.cpf}</td>
       {/* <td>{funcionario.nomeUsuario}</td> */}
-      <td>{funcionario.cargo.nome}</td>
+      {/* <td>{funcionario.cargo.nome}</td> */}
       {/* <td>{funcionario.telefone}</td> */}
-      <td>{funcionario.status}</td>
+      <td>{funcionario.status ? "Ativo" : "Inativo"}</td>
       {/* <td>{funcionario.email}</td> */}
       <td>
         <AiOutlineEdit
@@ -115,7 +115,7 @@ function LinhaFuncionario({ funcionario, handleEdit, handleConfirm }) {
         />{" "}
         <AiOutlineDelete
           size={20}
-          onClick={() => handleConfirm(funcionario.codigo)}
+          onClick={() => handleConfirm(funcionario.info.codigo)}
           style={{ cursor: "pointer", color: "red" }}
           title="Excluir"
         />

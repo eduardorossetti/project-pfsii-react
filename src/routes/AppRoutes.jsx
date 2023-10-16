@@ -11,11 +11,11 @@ import {
   PageCargos,
   PageFuncionarios,
   HomePage,
-  Page404
+  Page404,
+  PageDepartamentos
 } from "../pages/Layout/Index";
 
 import LoginPage from "../pages/LoginPage/Index";
-// import HomePage from "../pages/HomePage/Index";
 
 const AppRoutes = () => {
   const Private = ({ children }) => {
@@ -59,6 +59,14 @@ const AppRoutes = () => {
                 element={
                   <Private>
                     <PageFuncionarios />
+                  </Private>
+                }
+              />
+              <Route
+                path="/project-pfsii-react/cadastro/departamentos"
+                element={
+                  <Private>
+                    <PageDepartamentos />
                   </Private>
                 }
               />

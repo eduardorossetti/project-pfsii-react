@@ -8,20 +8,8 @@ import { toast } from "react-toastify";
 export default function TelaCadastroCargos(props) {
   const [exibeTabela, setExibeTabela] = useState(true);
   const [onEdit, setOnEdit] = useState(null);
-  const [cargos, setCargos] = useState([]);
   const [departamentos, setDepartamentos] = useState([]);
   const [filtro, setFiltro] = useState("");
-
-  const getCargos = async () => {
-    try {
-      const res = await axios.get(urlBase + "/cargos");
-      if (Array.isArray(res.data)) {
-        setCargos(res.data);
-      }
-    } catch ({ response }) {
-      toast.error(`Não foi possível obter cargos: ${response.data.message}`);
-    }
-  };
 
   const getDepartamentos = async () => {
     try {
@@ -35,14 +23,13 @@ export default function TelaCadastroCargos(props) {
   };
 
   useEffect(() => {
-    getCargos();
     getDepartamentos();
-  }, [setCargos]);
+  }, [setDepartamentos]);
 
   return exibeTabela ? (
     <List
-      cargos={cargos}
-      setCargos={setCargos}
+      departamentos={departamentos}
+      setDepartamentos={setDepartamentos}
       setOnEdit={setOnEdit}
       filtro={filtro}
       aoMudarFiltro={setFiltro}
@@ -50,11 +37,10 @@ export default function TelaCadastroCargos(props) {
     />
   ) : (
     <Form
-      departamentos={departamentos}
       onEdit={onEdit}
       setOnEdit={setOnEdit}
-      cargos={cargos}
-      setCargos={setCargos}
+      departamentos={departamentos}
+      setDepartamentos={setDepartamentos}
       setExibeTabela={setExibeTabela}
     />
   );

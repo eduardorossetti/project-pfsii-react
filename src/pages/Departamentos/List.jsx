@@ -7,9 +7,9 @@ import { urlBase } from "../../utils/definitions";
 import axios from "axios";
 import { toast } from "react-toastify";
 
-export default function TabelaCadastroCargos({
-  cargos,
-  setCargos,
+export default function TabelaCadastroDepartamentos({
+  departamentos,
+  setDepartamentos,
   filtro,
   aoMudarFiltro,
   setOnEdit,
@@ -25,11 +25,11 @@ export default function TabelaCadastroCargos({
 
   const handleDelete = async (codigo) => {
     await axios
-      .delete(`${urlBase}/cargos/${codigo}`)
+      .delete(`${urlBase}/departamentos/${codigo}`)
       .then((response) => {
-        const newArray = cargos.filter((cargo) => cargo.codigo !== codigo);
+        const newArray = departamentos.filter((departamento) => departamento.codigo !== codigo);
 
-        setCargos(newArray);
+        setDepartamentos(newArray);
         toast.success(response.data.message);
       })
       .catch(({ response }) => toast.error(response.data.message));
@@ -42,13 +42,13 @@ export default function TabelaCadastroCargos({
     setExibeTabela(false);
   };
 
-  cargos.forEach((cargo, i) => {
-    if (cargo.nome.toLowerCase().indexOf(filtro.toLowerCase()) === -1) {
+  departamentos.forEach((departamento, i) => {
+    if (departamento.nome.toLowerCase().indexOf(filtro.toLowerCase()) === -1) {
       return;
     }
     linhas.push(
-      <LinhaCargo
-        cargo={cargo}
+      <LinhaDepartamento
+        departamento={departamento}
         key={i}
         handleEdit={handleEdit}
         handleConfirm={confirmOnDelete}
@@ -88,22 +88,22 @@ export default function TabelaCadastroCargos({
   );
 }
 
-function LinhaCargo({ cargo, handleEdit, handleConfirm }) {
+function LinhaDepartamento({ departamento, handleEdit, handleConfirm }) {
   return (
     <tr>
-      <td>{cargo.codigo}</td>
-      <td>{cargo.nome}</td>
-      <td>{cargo.descricao}</td>
+      <td>{departamento.codigo}</td>
+      <td>{departamento.nome}</td>
+      <td>{departamento.descricao}</td>
       <td>
         <AiOutlineEdit
           size={20}
-          onClick={() => handleEdit(cargo)}
+          onClick={() => handleEdit(departamento)}
           style={{ cursor: "pointer" }}
           title="Editar"
         />{" "}
         <AiOutlineDelete
           size={20}
-          onClick={() => handleConfirm(cargo.codigo)}
+          onClick={() => handleConfirm(departamento.codigo)}
           style={{ cursor: "pointer", color: "red" }}
           title="Excluir"
         />

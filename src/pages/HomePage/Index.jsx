@@ -1,8 +1,10 @@
 import { Card, Row, Container, Col } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
+  faBuilding,
   faFilePen,
   faUserPlus,
+
 } from "@fortawesome/free-solid-svg-icons";
 import Logo from "./img/img_aprata.png";
 import { Link } from "react-router-dom";
@@ -31,6 +33,16 @@ const Home = () => {
               <Card.Body className="text-center">
                 <h5>Funcionarios</h5>
                 <FontAwesomeIcon icon={faUserPlus} size="2x" />
+              </Card.Body>
+            </Card>
+          </Link>
+        </Col>
+        <Col className="p-2 col-md-2 col-sm-6">
+          <Link to="/project-pfsii-react/cadastro/departamentos">
+            <Card className="bg-light">
+              <Card.Body className="text-center">
+                <h5>Departamentos</h5>
+                <FontAwesomeIcon icon={faBuilding} size="2x" />
               </Card.Body>
             </Card>
           </Link>

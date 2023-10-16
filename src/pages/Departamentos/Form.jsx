@@ -1,5 +1,5 @@
 import { Container, Col, Form, Row, Button } from "react-bootstrap";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import Cabecalho2 from "../../components/HeaderBelow";
 import { urlBase } from "../../utils/definitions";
 import axios from "axios";
@@ -8,34 +8,29 @@ import { Formik } from "formik";
 import * as Yup from "yup";
 import FormTextField from "../../components/Form/form-field";
 import FormTextAreaField from "../../components/Form/form-textarea";
-import SearchBar from "../../components/SearchBar/Index";
 
 const schema = Yup.object().shape({
   nome: Yup.string().required("Nome é obrigatório"),
   descricao: Yup.string().required("Descrição é obrigatório"),
-  departamento: Yup.object().required("Departamento é obrigatório")
 });
 
 const initialValues = {
   codigo: "",
   nome: "",
   descricao: "",
-  departamento: "",
 };
 
 const options = {
   headers: { "content-type": "application/json" },
 };
 
-export default function FormCargo({
-  departamentos,
+export default function FormDepartamento({
   onEdit,
   setExibeTabela,
   setOnEdit,
-  cargos,
-  setCargos,
+  departamentos,
+  setDepartamentos,
 }) {
-  const [selectedDepartamento, setSelectedDepartamento] = useState();
   const formRef = useRef();
   const formikRef = useRef();
 
@@ -47,10 +42,6 @@ export default function FormCargo({
           formikRef.current.setFieldValue(key, onEdit[key]);
         }
       }
-      setSelectedDepartamento({
-        codigo: onEdit.departamento.codigo,
-        nome: onEdit.departamento.nome,
-      });
     }
   }, [onEdit]);
 
@@ -60,17 +51,17 @@ export default function FormCargo({
   };
 
   const handleSubmit = async (values, actions) => {
-    const updatedCargos = cargos;
+    const updatedDepartamentos = departamentos;
 
     if (onEdit) {
       axios
-        .put(`${urlBase}/cargos/`, JSON.stringify(values), options)
+        .put(`${urlBase}/departamentos/`, JSON.stringify(values), options)
         .then((response) => {
-          const index = updatedCargos.findIndex(
+          const index = updatedDepartamentos.findIndex(
             (i) => i.codigo === onEdit.codigo
           );
-          updatedCargos[index] = values;
-          setCargos(updatedCargos);
+          updatedDepartamentos[index] = values;
+          setDepartamentos(updatedDepartamentos);
           toast.success(response.data.message);
         })
         .catch(({ response }) => {
@@ -78,12 +69,12 @@ export default function FormCargo({
         });
     } else {
       axios
-        .post(`${urlBase}/cargos/`, JSON.stringify(values), options)
+        .post(`${urlBase}/departamentos/`, JSON.stringify(values), options)
         .then((response) => {
           formikRef.current.setFieldValue("codigo", response.data.id);
           values.codigo = response.data.id;
-          updatedCargos.push(values);
-          setCargos(updatedCargos);
+          updatedDepartamentos.push(values);
+          setDepartamentos(updatedDepartamentos);
           toast.success(response.data.message);
         })
         .catch(({ response }) => {
@@ -94,7 +85,7 @@ export default function FormCargo({
 
   return (
     <div>
-      <Cabecalho2 texto1={"Cadastro"} texto2={"Cargo"} />
+      <Cabecalho2 texto1={"Cadastro"} texto2={"Departamento"} />
       <Container
         className="my-4 p-3 overflow-auto"
         style={{ maxHeight: "75vh" }}
@@ -119,7 +110,7 @@ export default function FormCargo({
               <Row>
                 <Col sm={2} md={2} lg={2} className="mb-3">
                   <FormTextField
-                    controlId="formCargo.codigo"
+                    controlId="formDepartamento.codigo"
                     label="Código"
                     name="codigo"
                     value={values.codigo}
@@ -131,25 +122,11 @@ export default function FormCargo({
               <Row>
                 <Col className="mb-3">
                   <FormTextField
-                    controlId="formCargo.nome"
+                    controlId="formDepartamento.nome"
                     label="Nome"
                     name="nome"
-                    placeholder="Informe o nome do cargo"
+                    placeholder="Informe o nome do departamento"
                     value={values.nome}
-                    required
-                  />
-                </Col>
-                <Col md={6} className="mb-3">
-                  <SearchBar
-                    controlId="formCargo.departamento"
-                    label="Departamento"
-                    name="departamento"
-                    data={departamentos}
-                    keyField="codigo"
-                    searchField="nome"
-                    select={setSelectedDepartamento}
-                    selected={selectedDepartamento}
-                    value={values.departamento}
                     required
                   />
                 </Col>
@@ -158,7 +135,7 @@ export default function FormCargo({
               <Row>
                 <Col className="mb-3">
                   <FormTextAreaField
-                    controlId="formCargo.descricao"
+                    controlId="formDepartamento.descricao"
                     label="Descrição"
                     name="descricao"
                     value={values.descricao}

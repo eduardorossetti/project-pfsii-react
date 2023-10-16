@@ -1,7 +1,7 @@
 export default function Cabecalho2(props) {
   return (
     <>
-      <nav className="d-flex" style={{ fontSize: "22px" }}>
+      <nav className="d-flex" style={{ fontSize: "20px" }}>
         <div className="py-2 px-2 text-white" style={{ backgroundColor: "#E3B320", height: "50px",
       minWidth: "fit-content" }}>
           {props.texto1}

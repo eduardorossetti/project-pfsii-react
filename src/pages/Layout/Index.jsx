@@ -1,16 +1,23 @@
 import Cargos from "../Cargos/Index";
 import Funcionarios from "../Funcionarios/Index";
-import Cabecalho1 from "../../components/Cabecalho1";
+import Header from "../../components/Header";
 import Home from "../HomePage/Index";
 import Pagina404 from "../404/Index";
+import Departamentos from "../Departamentos/Index";
+import Footer from "../../components/Footer";
+
+const alturaRodape = 85;
 
 // PÁGINAS
 
 function PageCargos(props) {
   return (
     <>
-      <Cabecalho1 />
-      <Cargos />
+      <Header />
+      <div style={{ marginBottom: `${alturaRodape}px` }}>
+        <Cargos />
+      </div>
+      <Footer />
     </>
   );
 }
@@ -18,8 +25,23 @@ function PageCargos(props) {
 function PageFuncionarios(props) {
   return (
     <>
-      <Cabecalho1 />
-      <Funcionarios />
+      <Header />
+      <div style={{ marginBottom: `${alturaRodape}px` }}>
+        <Funcionarios />
+      </div>
+      <Footer />
+    </>
+  );
+}
+
+function PageDepartamentos(props) {
+  return (
+    <>
+      <Header />
+      <div style={{ marginBottom: `${alturaRodape}px` }}>
+        <Departamentos />
+      </div>
+      <Footer />
     </>
   );
 }
@@ -29,8 +51,11 @@ function PageFuncionarios(props) {
 function HomePage(props) {
   return (
     <>
-      <Cabecalho1 />
-      <Home />
+      <Header />
+      <div style={{ marginBottom: `${alturaRodape}px` }}>
+        <Home />
+      </div>
+      <Footer />
     </>
   );
 }
@@ -38,15 +63,11 @@ function HomePage(props) {
 function Page404(props) {
   return (
     <>
-      {/* < Cabecalho1 /> */}
+      <Header />
       <Pagina404 />
+      <Footer />
     </>
   );
 }
 
-export {
-  PageCargos,
-  PageFuncionarios,
-  HomePage,
-  Page404,
-};
+export { PageCargos, PageFuncionarios, HomePage, Page404, PageDepartamentos };
