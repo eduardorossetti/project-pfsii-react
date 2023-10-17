@@ -58,7 +58,7 @@ export default function TabelaCadastroDepartamentos({
 
   return (
     <div>
-      <Cabecalho2 texto1={"Consulta"} texto2={"Cargos"} />
+      <Cabecalho2 texto1={"Consulta"} texto2={"Departamentos"} />
       <Container className="mt-3 overflow-auto">
         <div className="d-flex mb-3 justify-content-between">
           <BotaoNovo acaoBtnNovo={() => setExibeTabela(false)} />
