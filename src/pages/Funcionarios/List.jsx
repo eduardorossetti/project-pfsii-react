@@ -28,7 +28,7 @@ export default function TabelaCadastroFuncionarios({
       .delete(`${urlBase}/funcionarios/${codigo}`)
       .then((response) => {
         const newArray = funcionarios.filter(
-          (funcionario) => funcionario.info.codigo !== codigo
+          (funcionario) => funcionario.info_codigo !== codigo
         );
 
         setFuncionarios(newArray);
@@ -115,7 +115,7 @@ function LinhaFuncionario({ funcionario, handleEdit, handleConfirm }) {
         />{" "}
         <AiOutlineDelete
           size={20}
-          onClick={() => handleConfirm(funcionario.info.codigo)}
+          onClick={() => handleConfirm(funcionario.info_codigo)}
           style={{ cursor: "pointer", color: "red" }}
           title="Excluir"
         />
