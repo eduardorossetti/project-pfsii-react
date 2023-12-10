@@ -78,6 +78,7 @@ export default function TabelaCadastroCargos({
               <th>#</th>
               <th>Nome</th>
               <th>Descrição</th>
+              <th>Departamento</th>
               <th>Ações</th>
             </tr>
           </thead>
@@ -94,6 +95,7 @@ function LinhaCargo({ cargo, handleEdit, handleConfirm }) {
       <td>{cargo.codigo}</td>
       <td>{cargo.nome}</td>
       <td>{cargo.descricao}</td>
+      <td>{cargo.departamento.nome}</td>
       <td>
         <AiOutlineEdit
           size={20}
