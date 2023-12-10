@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/project-pfsii-react/static/css/main.b82a9494.css",
-    "main.js": "/project-pfsii-react/static/js/main.046b82e7.js",
+    "main.js": "/project-pfsii-react/static/js/main.32aa463d.js",
     "static/media/img_aprata.png": "/project-pfsii-react/static/media/img_aprata.8beb9c0b63fa0152c93b.png",
     "static/media/error.jpg": "/project-pfsii-react/static/media/error.11311d4cd8a55eea3610.jpg",
     "static/media/lato-latin-300.woff": "/project-pfsii-react/static/media/lato-latin-300.4d96f9e685a54d1ef6cf.woff",
@@ -26,10 +26,10 @@
     "static/media/lato-latin-100italic.woff2": "/project-pfsii-react/static/media/lato-latin-100italic.89b95baaf00652c7c3af.woff2",
     "index.html": "/project-pfsii-react/index.html",
     "main.b82a9494.css.map": "/project-pfsii-react/static/css/main.b82a9494.css.map",
-    "main.046b82e7.js.map": "/project-pfsii-react/static/js/main.046b82e7.js.map"
+    "main.32aa463d.js.map": "/project-pfsii-react/static/js/main.32aa463d.js.map"
   },
   "entrypoints": [
     "static/css/main.b82a9494.css",
-    "static/js/main.046b82e7.js"
+    "static/js/main.32aa463d.js"
   ]
 }
