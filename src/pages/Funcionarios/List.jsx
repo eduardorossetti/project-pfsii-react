@@ -17,15 +17,14 @@ export default function TabelaCadastroFuncionarios({
 }) {
   const linhas = [];
 
-  const confirmOnDelete = (codigo) => {
-    if (window.confirm(`Confirma a exclusão do item ${codigo}?`)) {
-      handleDelete(codigo);
+  const confirmOnDelete = (codigos) => {
+    if (window.confirm(`Confirma a exclusão do item ${codigos[0]}?`)) {
+      handleDelete(codigos[1]);
     }
   };
 
   const handleDelete = async (codigo) => {
-    await axios
-      .delete(`${urlBase}/funcionarios/${codigo}`)
+    await axios.delete(`${urlBase}/telefones/${codigo}`)
       .then((response) => {
         const newArray = funcionarios.filter(
           (funcionario) => funcionario.info.codigo !== codigo
@@ -33,8 +32,14 @@ export default function TabelaCadastroFuncionarios({
 
         setFuncionarios(newArray);
         toast.success(response.data.message);
+
+        return axios.delete(`${urlBase}/funcionarios/${codigo}`)
+
       })
-      .catch(({ response }) => toast.error(response.data.message));
+      .catch(({ response }) => {
+        console.log(response);
+        toast.error(response.data.message)
+      });
 
     setOnEdit(null);
   };
@@ -96,7 +101,7 @@ function LinhaFuncionario({ funcionario, handleEdit, handleConfirm }) {
   const atribuicoes = funcionario.atribuicoes
     .map((atribuicao) => atribuicao.nome)
     .join(' / ')
-    
+
   return (
     <tr>
       <td>{funcionario.codigo}</td>
@@ -113,7 +118,7 @@ function LinhaFuncionario({ funcionario, handleEdit, handleConfirm }) {
         />{" "}
         <AiOutlineDelete
           size={20}
-          onClick={() => handleConfirm(funcionario.info.codigo)}
+          onClick={() => handleConfirm([funcionario.codigo, funcionario.info.codigo])}
           style={{ cursor: "pointer", color: "red" }}
           title="Excluir"
         />

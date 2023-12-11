@@ -20,7 +20,8 @@ const schema = Yup.object().shape({
   nomeUsuario: Yup.string().required("Usuário é obrigatório"),
   senhaUsuario: Yup.string().required("Senha é obrigatório"),
   atribuicoes: Yup.array().min(1, "Selecione, no mínimo, um cargo"),
-  info_telefone: Yup.string().required("Telefone é obrigatório"),
+  info_telefone1: Yup.string().required(1, "Telefone é obrigatório"),
+  info_telefone2: Yup.string(),
   info_email: Yup.string()
     .required("E-mail é obrigatório")
     .matches(emailRegex, "Endereço de email inválido"),
@@ -40,7 +41,9 @@ const initialValues = {
   nomeUsuario: "",
   senhaUsuario: "",
   info_codigo: "",
-  info_telefone: "",
+  info_telefone: [],
+  info_telefone1: "",
+  info_telefone2: "",
   info_email: "",
   info_endereco: "",
   info_bairro: "",
@@ -65,7 +68,13 @@ export default function FormFuncionario({
   const handleSubmit = async (values, actions) => {
     const updatedFuncionarios = funcionarios;
 
+    formik.values.info_telefone = [
+      formik.values.info_telefone1,
+      formik.values.info_telefone2 === null ? "" : formik.values.info_telefone2,
+    ];
+
     if (onEdit) {
+
       axios
         .put(`${urlBase}/funcionarios/`, JSON.stringify(values), options)
         .then((response) => {
@@ -77,22 +86,46 @@ export default function FormFuncionario({
           updatedFuncionarios[index] = values;
           // Set new list
           setFuncionarios(updatedFuncionarios);
-          toast.success(response.data.message);
+          
+          let telefones = { numeros: [formik.values.info_telefone1, formik.values.info_telefone2], pessoaId: formik.values.info_codigo };
+
+          return axios.put(`${urlBase}/telefones/`, JSON.stringify(telefones), options)
+            .then((response) => {
+              toast.success(response.data.message);
+            })
+            .catch(({ response }) => {
+              toast.error(response.data.message);
+            });
+
         })
         .catch(({ response }) => {
           toast.error(response.data.message);
         });
     } else {
+      
       axios
         .post(`${urlBase}/funcionarios/`, JSON.stringify(values), options)
         .then((response) => {
-          formik.setFieldValue("codigo", response.data.id);
-          values.codigo = response.data.id;
+          console.log(response);
+          formik.setFieldValue("codigo", response.data.funcionarioId);
+          formik.setFieldValue("info_codigo", response.data.pessoaId);
+          values.codigo = response.data.funcionarioId;
           updatedFuncionarios.push(values);
           setFuncionarios(updatedFuncionarios);
-          toast.success(response.data.message);
+          // toast.success(response.data.message);
           // After pushing new item to list, it goes to the end of it
           // It must be treated on list
+
+          let telefones = { numeros: [formik.values.info_telefone1, formik.values.info_telefone2], pessoaId: response.data.pessoaId };
+
+          return axios.post(`${urlBase}/telefones/`, JSON.stringify(telefones), options)
+            .then((response) => {
+              toast.success(response.data.message);
+            })
+            .catch(({ response }) => {
+              toast.error(response.data.message);
+            });
+
         })
         .catch(({ response }) => {
           toast.error(response.data.message);
@@ -110,11 +143,15 @@ export default function FormFuncionario({
 
   useEffect(() => {
     if (onEdit) {
-      console.log(onEdit);
       for (const key in onEdit) {
         if (key === "info") {
           for (const key2 in onEdit["info"]) {
-            formik.setFieldValue(`info_${key2}`, onEdit[key][key2]);
+            if (key2 === "telefone") {
+              formik.setFieldValue(`info_${key2}1`, onEdit[key][key2][0]);
+              formik.setFieldValue(`info_${key2}2`, onEdit[key][key2][1]);
+            } else {
+              formik.setFieldValue(`info_${key2}`, onEdit[key][key2]);
+            }
           }
         } else {
           formik.setFieldValue(key, onEdit[key]);
@@ -148,8 +185,9 @@ export default function FormFuncionario({
             </Col>
             <Col sm={2} md={2} lg={2} className="mb-3">
               <FormTextField
-                controlId="formFuncionario.codigo_pessoa"
+                controlId="formFuncionario.info_codigo"
                 name="info_codigo"
+                // label="Pessoa Código"
                 isDisabled={true}
                 type="hidden"
               />
@@ -304,9 +342,20 @@ export default function FormFuncionario({
           <Row>
             <Col md={6} className="mb-3">
               <MaskedFormTextField
-                controlId="formFuncionario.telefone"
-                label="Telefone"
-                name="info_telefone"
+                controlId="formFuncionario.info_telefone1"
+                label="Telefone 1"
+                name="info_telefone1"
+                placeholder="Informe o telefone do funcionário"
+                format="(##) #####-####"
+                mask="_"
+                required
+              />
+            </Col>
+            <Col md={6} className="mb-3">
+              <MaskedFormTextField
+                controlId="formFuncionario.info_telefone2"
+                label="Telefone 2"
+                name="info_telefone2"
                 placeholder="Informe o telefone do funcionário"
                 format="(##) #####-####"
                 mask="_"
