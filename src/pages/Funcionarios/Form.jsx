@@ -65,7 +65,7 @@ export default function FormFuncionario({
   funcionarios,
   setFuncionarios,
 }) {
-  const handleSubmit = async (values, actions) => {
+  async function handleSubmit (values, actions) {
     const updatedFuncionarios = funcionarios;
 
     formik.values.info_telefone = [
@@ -75,9 +75,9 @@ export default function FormFuncionario({
 
     if (onEdit) {
 
-      axios
+      await axios
         .put(`${urlBase}/funcionarios/`, JSON.stringify(values), options)
-        .then((response) => {
+        .then(async (response) => {
           // Get index of item on edition
           const index = updatedFuncionarios.findIndex(
             (i) => i.codigo === onEdit.codigo
@@ -89,13 +89,12 @@ export default function FormFuncionario({
           
           let telefones = { numeros: [formik.values.info_telefone1, formik.values.info_telefone2], pessoaId: formik.values.info_codigo };
 
-          return axios.put(`${urlBase}/telefones/`, JSON.stringify(telefones), options)
-            .then((response) => {
-              toast.success(response.data.message);
-            })
-            .catch(({ response }) => {
-              toast.error(response.data.message);
-            });
+          try {
+            const response_1 = await axios.put(`${urlBase}/telefones/`, JSON.stringify(telefones), options);
+            toast.success(response_1.data.message);
+          } catch ({ response: response_2 }) {
+            toast.error(response_2.data.message);
+          }
 
         })
         .catch(({ response }) => {
@@ -103,28 +102,23 @@ export default function FormFuncionario({
         });
     } else {
       
-      axios
+      await axios
         .post(`${urlBase}/funcionarios/`, JSON.stringify(values), options)
-        .then((response) => {
-          console.log(response);
+        .then(async (response) => {
           formik.setFieldValue("codigo", response.data.funcionarioId);
           formik.setFieldValue("info_codigo", response.data.pessoaId);
           values.codigo = response.data.funcionarioId;
           updatedFuncionarios.push(values);
           setFuncionarios(updatedFuncionarios);
-          // toast.success(response.data.message);
-          // After pushing new item to list, it goes to the end of it
-          // It must be treated on list
 
           let telefones = { numeros: [formik.values.info_telefone1, formik.values.info_telefone2], pessoaId: response.data.pessoaId };
 
-          return axios.post(`${urlBase}/telefones/`, JSON.stringify(telefones), options)
-            .then((response) => {
-              toast.success(response.data.message);
-            })
-            .catch(({ response }) => {
-              toast.error(response.data.message);
-            });
+          try {
+            const response_1 = await axios.post(`${urlBase}/telefones/`, JSON.stringify(telefones), options);
+            toast.success(response_1.data.message);
+          } catch ({ response: response_2 }) {
+            toast.error(response_2.data.message);
+          }
 
         })
         .catch(({ response }) => {

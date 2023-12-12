@@ -12,7 +12,7 @@ export default function TelaCadastroFuncionarios(props) {
   const [cargos, setCargos] = useState([]);
   const [filtro, setFiltro] = useState("");
 
-  const getFuncionarios = async () => {
+  async function getFuncionarios(){
     try {
       const res = await axios.get(urlBase + "/funcionarios");
       if (Array.isArray(res.data)) {
@@ -25,7 +25,7 @@ export default function TelaCadastroFuncionarios(props) {
     }
   };
 
-  const getCargos = async () => {
+  async function getCargos(){
     try {
       const res = await axios.get(urlBase + "/cargos");
       if (Array.isArray(res.data)) {

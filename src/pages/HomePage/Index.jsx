@@ -31,7 +31,7 @@ const Home = () => {
           <Link to="/project-pfsii-react/cadastro/funcionarios">
             <Card className="bg-light">
               <Card.Body className="text-center">
-                <h5>Funcionarios</h5>
+                <h5>Funcionários</h5>
                 <FontAwesomeIcon icon={faUserPlus} size="2x" />
               </Card.Body>
             </Card>

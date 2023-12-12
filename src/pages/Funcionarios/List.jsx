@@ -17,13 +17,13 @@ export default function TabelaCadastroFuncionarios({
 }) {
   const linhas = [];
 
-  const confirmOnDelete = (codigos) => {
+  function confirmOnDelete (codigos) {
     if (window.confirm(`Confirma a exclusão do item ${codigos[0]}?`)) {
       handleDelete(codigos[1]);
     }
   };
 
-  const handleDelete = async (codigo) => {
+  async function handleDelete (codigo) {
     await axios.delete(`${urlBase}/telefones/${codigo}`)
       .then((response) => {
         const newArray = funcionarios.filter(
@@ -37,14 +37,13 @@ export default function TabelaCadastroFuncionarios({
 
       })
       .catch(({ response }) => {
-        console.log(response);
         toast.error(response.data.message)
       });
 
     setOnEdit(null);
   };
 
-  const handleEdit = (item) => {
+  function handleEdit (item){
     setOnEdit(item);
     setExibeTabela(false);
   };

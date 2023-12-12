@@ -41,7 +41,7 @@ export default function Menu() {
                     as={Link}
                     to="/project-pfsii-react/cadastro/funcionarios"
                   >
-                    Funcionarios
+                    Funcionários
                   </NavDropdown.Item>
                   <NavDropdown.Item
                     as={Link}
